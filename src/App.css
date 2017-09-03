@@ -1,0 +1,48 @@
+body {
+  margin: 2rem;
+}
+
+.child {
+  display: inline-block;
+  width: 200px;
+  background: #f7f7f7;
+  padding: 2rem;
+  margin: 1rem;
+  border-radius: 5px;
+}
+.input-form fieldset {
+  border: none;
+}
+.input-form label {
+  display: block;
+}
+
+/* tasks */
+.task-items {
+  padding: 0;
+}
+
+.task-line {
+  display: flex;
+  align-items: center;
+}
+
+.task-line span {
+  margin-right: 0.5rem;
+}
+
+.task-item {
+  list-style: none;
+}
+
+.task-button {
+  border: none;
+  background: #bada55;
+  padding: 0.5rem 1rem;
+  margin: 0.25rem 0;
+  cursor: pointer;
+}
+
+.task-button:hover {
+  background: tomato;
+}
