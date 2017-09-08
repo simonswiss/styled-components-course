@@ -4,17 +4,26 @@ import Rewards from "../Rewards";
 
 const Child = props => (
   <div className="child">
-    <small>Name</small>
-    <h2>{props.name}</h2>
-    <p>
-      <span className="total-points">{props.points}</span> poins
-    </p>
+    <header className="summary">
+      <h2>{props.name}</h2>
+      <div className="points">
+        <div>
+          <span className="total-points">{props.points}</span> poins
+        </div>
+      </div>
+    </header>
+
+    <button className="reset" onClick={props.resetChild}>
+      Reset
+    </button>
+
+    <Rewards rewards={props.rewards} handleNewItem={props.handleNewItem} />
+
     <Tasks
       tasks={props.tasks}
-      handleNewTask={props.handleNewTask}
+      handleNewItem={props.handleNewItem}
       checkTask={props.checkTask}
     />
-    <Rewards rewards={props.rewards} />
   </div>
 );
 

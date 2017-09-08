@@ -21,11 +21,13 @@ class App extends Component {
           rewards: [
             {
               name: "Movie date!",
-              points: 50
+              points: 50,
+              count: 0
             },
             {
               name: "chocolate",
-              points: 30
+              points: 30,
+              count: 0
             }
           ],
           newTask: {},
@@ -34,8 +36,9 @@ class App extends Component {
       ]
     };
 
-    this.handleNewTask = this.handleNewTask.bind(this);
+    this.handleNewItem = this.handleNewItem.bind(this);
     this.checkTask = this.checkTask.bind(this);
+    this.resetChild = this.resetChild.bind(this);
   }
 
   componentDidMount() {
@@ -47,9 +50,21 @@ class App extends Component {
   }
 
   // adding a new task
-  handleNewTask(data) {
+  handleNewItem(name, points, type) {
+    const item = {
+      name: name.value,
+      points: parseInt(points.value),
+      count: 0
+    };
+
     const children = this.state.children;
-    children[0].tasks.push(data);
+
+    if (type === "task") {
+      children[0].tasks.push(item);
+    } else {
+      children[0].rewards.push(item);
+    }
+
     this.setState({ children });
   }
 
@@ -69,7 +84,6 @@ class App extends Component {
 
     children[0].tasks[index] = updatedTask;
     children[0].points = totalPoints;
-    console.log(children);
 
     this.setState({
       children
@@ -78,9 +92,26 @@ class App extends Component {
     localStorage.setItem("appState", JSON.stringify(this.state));
   }
 
+  resetChild() {
+    const sure = window.confirm("are you sure??");
+    if (sure) {
+      const { children } = this.state;
+      const child = children[0];
+
+      children[0] = {
+        ...child,
+        name: child.name,
+        points: 0,
+        tasks: []
+      };
+
+      this.setState({ children });
+    }
+  }
+
   render() {
     return (
-      <div className="App">
+      <div className="children">
         {this.state.children.map((child, index) => (
           <Child
             key={index}
@@ -88,8 +119,9 @@ class App extends Component {
             points={child.points}
             tasks={child.tasks}
             rewards={child.rewards}
-            handleNewTask={this.handleNewTask}
+            handleNewItem={this.handleNewItem}
             checkTask={this.checkTask}
+            resetChild={this.resetChild}
           />
         ))}
       </div>
