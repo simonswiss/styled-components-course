@@ -61,15 +61,15 @@ class Tasks extends Component {
 
 const Task = props => (
   <li className="task-item">
-    <div className="task-line">
-      <span>{props.count}</span>
-      <button
-        className="task-button"
-        onClick={() => props.handleTaskClick(props.index)}
-      >
-        {props.name} ({props.points})
-      </button>
-    </div>
+    <button
+      className="task-button"
+      onClick={() => props.handleTaskClick(props.index)}
+    >
+      <div className="task-name">{props.name}</div>
+      <div className="task-points">{props.points}</div>
+      <div className="task-counter">{props.count}</div>
+    </button>
+    <button className="task-delete">&times;</button>
   </li>
 );
 

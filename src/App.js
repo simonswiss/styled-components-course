@@ -38,6 +38,14 @@ class App extends Component {
     this.checkTask = this.checkTask.bind(this);
   }
 
+  componentDidMount() {
+    const startState = JSON.parse(localStorage.getItem("appState")) || null;
+
+    if (startState) {
+      this.setState(startState);
+    }
+  }
+
   // adding a new task
   handleNewTask(data) {
     const children = this.state.children;
@@ -66,6 +74,8 @@ class App extends Component {
     this.setState({
       children
     });
+
+    localStorage.setItem("appState", JSON.stringify(this.state));
   }
 
   render() {
