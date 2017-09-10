@@ -6,39 +6,14 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      children: [
-        {
-          name: "Anthony",
-          points: 0,
-          tasks: [
-            {
-              name: "pack away room",
-              points: 5,
-              count: 0
-            },
-            { name: "clothes in the laundry basket", points: 3, count: 0 }
-          ],
-          rewards: [
-            {
-              name: "Movie date!",
-              points: 50,
-              count: 0
-            },
-            {
-              name: "chocolate",
-              points: 30,
-              count: 0
-            }
-          ],
-          newTask: {},
-          newReward: {}
-        }
-      ]
+      children: []
     };
 
     this.handleNewItem = this.handleNewItem.bind(this);
     this.checkTask = this.checkTask.bind(this);
     this.resetChild = this.resetChild.bind(this);
+    this.addChild = this.addChild.bind(this);
+    this.deleteChild = this.deleteChild.bind(this);
   }
 
   componentDidMount() {
@@ -46,6 +21,35 @@ class App extends Component {
 
     if (startState) {
       this.setState(startState);
+    }
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem("appState", JSON.stringify(this.state));
+  }
+
+  // adding child
+  addChild(e) {
+    e.preventDefault();
+    const newChild = {
+      id: Date.now(),
+      name: this.newChild.value,
+      points: 0,
+      tasks: [],
+      rewards: []
+    };
+    const { children } = this.state;
+    children.push(newChild);
+
+    this.setState({ children });
+    this.newChild.value = "";
+  }
+
+  deleteChild(id) {
+    const sure = window.confirm("are you sure??");
+    if (sure) {
+      const children = this.state.children.filter(child => child.id !== id);
+      this.setState({ children });
     }
   }
 
@@ -111,19 +115,31 @@ class App extends Component {
 
   render() {
     return (
-      <div className="children">
-        {this.state.children.map((child, index) => (
-          <Child
-            key={index}
-            name={child.name}
-            points={child.points}
-            tasks={child.tasks}
-            rewards={child.rewards}
-            handleNewItem={this.handleNewItem}
-            checkTask={this.checkTask}
-            resetChild={this.resetChild}
-          />
-        ))}
+      <div className="app-wrapper">
+        <div className="children">
+          {this.state.children.map(child => (
+            <Child
+              key={child.id}
+              {...child}
+              handleNewItem={this.handleNewItem}
+              checkTask={this.checkTask}
+              resetChild={this.resetChild}
+              deleteChild={this.deleteChild}
+            />
+          ))}
+        </div>
+
+        <div className="add-child">
+          <form onSubmit={this.addChild}>
+            <input
+              ref={input => (this.newChild = input)}
+              required
+              type="text"
+              placeholder="child's name..."
+            />
+            <input type="submit" value="Add child" />
+          </form>
+        </div>
       </div>
     );
   }

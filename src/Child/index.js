@@ -11,6 +11,12 @@ const Child = props => (
           <span className="total-points">{props.points}</span> poins
         </div>
       </div>
+      <button
+        className="delete-child"
+        onClick={() => props.deleteChild(props.id)}
+      >
+        Delete
+      </button>
     </header>
 
     <button className="reset" onClick={props.resetChild}>

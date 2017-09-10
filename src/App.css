@@ -21,10 +21,18 @@ body {
 
 .children {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .child {
-  flex: 0 1 400px;
+  flex: 0 1 300px;
+  margin: 0.5rem 1.5rem;
+}
+
+.add-child {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 /* #####
@@ -32,10 +40,17 @@ summary
 ##### */
 
 .summary {
+  position: relative;
   border: solid 2px rgba(0, 0, 0, 0.1);
   padding: 1.5rem;
   border-radius: 5px;
   margin-bottom: 1rem;
+}
+
+.delete-child {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .total-points {
@@ -133,12 +148,14 @@ inline-form
 .inline-form {
   display: flex;
   align-items: flex-end;
+  flex-wrap: wrap;
 }
 
 .inline-form fieldset {
   border: none;
   padding: 0;
   margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 .inline-form label {
   display: block;
