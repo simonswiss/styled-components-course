@@ -3,20 +3,33 @@
 }
 
 body {
-  margin: 2rem;
+  margin: 6rem 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.get-started {
+  font-size: 4rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 5rem;
+  line-height: 1;
+  color: #d9d9d9;
 }
 
 .heading,
 .subheading {
   margin-top: 2rem;
-  color: #b7b7b7;
+  color: #3b3b3b;
+  font-weight: 900;
+  font-size: 1.5rem;
   text-transform: uppercase;
-  font-size: 0.9rem;
 }
 
 .subheading {
   font-size: 0.8rem;
   margin-top: 1.5rem;
+  color: #b7b7b7;
 }
 
 .children {
@@ -25,14 +38,15 @@ body {
 }
 
 .child {
-  flex: 0 1 300px;
+  flex: 0 1 400px;
   margin: 0.5rem 1.5rem;
 }
 
 .add-child {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 1rem;
+  right: 1rem;
+  padding-top: 0.5rem;
 }
 
 /* #####
@@ -47,10 +61,15 @@ summary
   margin-bottom: 1rem;
 }
 
+.summary-name {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
 .delete-child {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 0.5rem;
+  right: 0.5rem;
 }
 
 .total-points {
@@ -66,6 +85,11 @@ summary
   border-radius: 3px;
   cursor: pointer;
   transition: transform 0.05s;
+}
+
+.reset-gray {
+  background: #e7e7e7;
+  color: #7b7b7b;
 }
 
 .reset:hover {
@@ -90,7 +114,6 @@ list items
 
 .list-button {
   position: relative;
-  border: none;
   display: block;
   flex: 1;
   text-align: left;
@@ -109,6 +132,15 @@ list items
 
 .list-button:hover {
   background: rgba(7, 255, 204, 0.1);
+}
+
+.list-button[disabled] {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.list-button[disabled]:hover {
+  background: inherit;
 }
 
 .list-button__name {
@@ -139,6 +171,16 @@ list items
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.list-button__progress {
+  position: absolute;
+  bottom: -2px;
+  left: -2px;
+  z-index: 2;
+  background: #07ffcc;
+  height: 3px;
+  max-width: calc(100% + 4px);
 }
 
 /* #####

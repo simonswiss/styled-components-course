@@ -10,10 +10,12 @@ export default class extends Component {
           onSubmit={e => {
             e.preventDefault();
             this.props.handleNewItem(
+              this.props.childId,
               this.taskName,
               this.taskPoints,
-              this.props.itemType
+              this.props.type
             );
+            this.formRef.reset();
           }}
           ref={ref => (this.formRef = ref)}
         >
@@ -36,7 +38,9 @@ export default class extends Component {
               ref={input => (this.taskPoints = input)}
             />
           </fieldset>
-          <input type="submit" value={this.props.buttonText} />
+          <fieldset>
+            <input type="submit" value={this.props.buttonText} />
+          </fieldset>
         </form>
       </div>
     );
