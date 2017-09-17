@@ -9,9 +9,9 @@ class AddChild extends Component {
     };
   }
   render() {
+    // shortcircuit and redirect to created page after form is submitted
     if (this.state.trigger) {
-      const newItem = this.props.children.slice(-1)[0];
-      console.log(newItem);
+      const newItem = this.props.kids.slice(-1)[0];
       return <Redirect to={`/detail/${newItem.id}`} />;
     }
     return (

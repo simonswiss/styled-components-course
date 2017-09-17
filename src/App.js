@@ -36,7 +36,7 @@ class App extends Component {
     this.unlockReward = this.unlockReward.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const startState = JSON.parse(localStorage.getItem("appState")) || null;
 
     if (startState) {
@@ -172,61 +172,59 @@ class App extends Component {
 
   render() {
     return (
-      <div className="app-wrapper">
-        {!this.state.children.length && (
-          <h2 className="get-started">Add a child to get started...</h2>
-        )}
+      <Router>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <Children
+                kids={this.state.children}
+                addChild={this.addChild}
+                deleteChild={this.deleteChild}
+              />
+            )}
+          />
 
-        <Router>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => (
-                <Children kids={this.state.children} addChild={this.addChild} />
-              )}
-            />
+          <Route
+            path="/add-child"
+            render={props => {
+              return (
+                <AddChildForm
+                  history={props.history}
+                  addChild={this.addChild}
+                  children={this.state.children}
+                />
+              );
+            }}
+          />
 
-            <Route
-              exact
-              path="/add-child"
-              render={props => {
+          <Route
+            exact
+            path="/detail/:childId"
+            render={({ match }) => {
+              const childId = parseInt(match.params.childId);
+              const children = this.state.children.filter(
+                child => child.id === childId
+              );
+              if (children.length) {
+                const child = children[0];
                 return (
-                  <AddChildForm
-                    history={props.history}
-                    addChild={this.addChild}
-                    children={this.state.children}
+                  <Child
+                    {...child}
+                    handleNewItem={this.handleNewItem}
+                    achieveTask={this.achieveTask}
+                    resetChild={this.resetChild}
+                    deleteChild={this.deleteChild}
+                    unlockReward={this.unlockReward}
                   />
                 );
-              }}
-            />
-
-            <Route
-              path="/detail/:childId"
-              render={({ match }) => {
-                const childId = parseInt(match.params.childId);
-                const children = this.state.children.filter(
-                  child => child.id === childId
-                );
-                if (children.length) {
-                  const child = children[0];
-                  return (
-                    <Child
-                      {...child}
-                      handleNewItem={this.handleNewItem}
-                      achieveTask={this.achieveTask}
-                      resetChild={this.resetChild}
-                      deleteChild={this.deleteChild}
-                      unlockReward={this.unlockReward}
-                    />
-                  );
-                }
-                return <Redirect to="/" />;
-              }}
-            />
-          </Switch>
-        </Router>
-      </div>
+              }
+              return <Redirect to="/" />;
+            }}
+          />
+        </Switch>
+      </Router>
     );
   }
 }

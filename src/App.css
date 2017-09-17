@@ -1,22 +1,30 @@
 /* ##### global stuff ##### */
 
+// #21d4fd
+
 * {
   box-sizing: border-box;
 }
 
+html,
 body {
-  margin: 6rem 2rem;
+  min-height: 100%;
+}
+
+body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 .get-started {
-  font-size: 4rem;
+  position: absolute;
+  bottom: 2rem;
+  right: 7rem;
+  font-size: 1.5rem;
   font-weight: 700;
   text-align: center;
-  padding: 5rem;
   line-height: 1;
-  color: #d9d9d9;
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .heading,
@@ -34,6 +42,164 @@ body {
   color: #b7b7b7;
 }
 
+/* ##### children list view ##### */
+
+.home-view-wrapper {
+  background-color: #21d4fd;
+  background-image: linear-gradient(19deg, #21d4fd 0%, #b721ff 100%);
+  min-height: 100vh;
+}
+
+.home-view-wrapper h1 {
+  text-align: center;
+  color: white;
+  padding-top: 15vh;
+  font-size: 3rem;
+  font-weight: 900;
+  margin: 0;
+}
+
+.children-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 4rem 1rem;
+}
+
+.child-card {
+  position: relative;
+  flex: 0 0 250px;
+  margin: 1rem;
+  background: white;
+  text-align: center;
+  padding: 0;
+  border-radius: 4px;
+  color: #664e73;
+  /* border: solid 1px #f7f7f7; */
+  box-shadow: 0 5px 20px -3px rgba(0, 0, 0, 0.05);
+  transition: transform 0.15s;
+  text-decoration: none;
+}
+
+.child-card:hover {
+  transform: translateY(-2px);
+}
+
+.child-card header {
+  /* background: #f7f7f7; */
+  padding: 1.5rem 0;
+}
+
+.child-card h2 {
+  padding: 0 1.5rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-weight: 900;
+}
+
+.child-card-points {
+  padding: 0 1.5rem;
+}
+
+.points-label {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.child-card-points h2 {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+  margin: 0;
+}
+
+.child-card-stats {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: solid 1px #f0f0f0;
+  border-bottom: solid 1px #f0f0f0;
+}
+
+.child-card-stats li {
+  padding: 1rem 1.5rem;
+}
+
+.stats-tasks {
+  border-right: solid 1px #f0f0f0;
+}
+
+.child-card-achievements {
+  padding: 1rem 1.5rem;
+  text-align: center;
+}
+
+.child-card-delete {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: tomato;
+  border: none;
+  width: 1.5rem;
+  color: white;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  border-radius: 3px;
+  border: solid 2px transparent;
+}
+
+.child-card-delete:hover {
+  cursor: pointer;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.add-child-button {
+  /* background: white; */
+  padding: 0.75rem;
+  border: solid 2px white;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 800;
+  border-radius: 50%;
+  line-height: 1;
+  transition: all 0.1s ease-in-out;
+  z-index: 9;
+  cursor: pointer;
+}
+
+.add-child-button:focus {
+  outline: none;
+}
+
+.add-child-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.add-child-button.open {
+  transform: rotate(45deg);
+}
+
+.add-child-icon {
+  fill: white;
+  height: 32px;
+  width: 32px;
+}
+
 .children {
   display: flex;
   flex-wrap: wrap;
@@ -44,11 +210,22 @@ body {
   margin: 0.5rem 1.5rem;
 }
 
+/* the form */
 .add-child {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  padding-top: 0.5rem;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.add-child .inline-form {
+  padding: 2rem;
+  background: white;
 }
 
 /* ##### child view ##### */
