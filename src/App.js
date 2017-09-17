@@ -8,7 +8,17 @@
 */
 
 import React, { Component } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  Switch
+} from "react-router-dom";
+
 import Child from "./Child";
+import Children from "./Children";
+import AddChildForm from "./AddChildForm";
 import "./App.css";
 
 class App extends Component {
@@ -39,11 +49,10 @@ class App extends Component {
   }
 
   // adding child
-  addChild(e) {
-    e.preventDefault();
+  addChild(name) {
     const newChild = {
       id: Date.now(),
-      name: this.newChild.value,
+      name: name,
       points: 0,
       tasks: [],
       rewards: []
@@ -52,7 +61,6 @@ class App extends Component {
     children.push(newChild);
 
     this.setState({ children });
-    this.newChild.value = "";
   }
 
   deleteChild(id) {
@@ -137,8 +145,6 @@ class App extends Component {
   }
 
   unlockReward(childId, rewardIndex) {
-    console.log(childId, rewardIndex);
-
     const { children } = this.state;
     // the target child index
     const index = children.map(child => child.id).indexOf(childId);
@@ -170,35 +176,56 @@ class App extends Component {
         {!this.state.children.length && (
           <h2 className="get-started">Add a child to get started...</h2>
         )}
-        <div className="children">
-          {this.state.children.map(child => (
-            <Child
-              key={child.id}
-              {...child}
-              handleNewItem={this.handleNewItem}
-              achieveTask={this.achieveTask}
-              resetChild={this.resetChild}
-              deleteChild={this.deleteChild}
-              unlockReward={this.unlockReward}
-            />
-          ))}
-        </div>
 
-        <div className="add-child">
-          <form className="inline-form" onSubmit={this.addChild}>
-            <fieldset>
-              <input
-                ref={input => (this.newChild = input)}
-                required
-                type="text"
-                placeholder="Type a name..."
-              />
-            </fieldset>
-            <fieldset>
-              <input type="submit" value="Add child" />
-            </fieldset>
-          </form>
-        </div>
+        <Router>
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <Children kids={this.state.children} addChild={this.addChild} />
+              )}
+            />
+
+            <Route
+              exact
+              path="/add-child"
+              render={props => {
+                return (
+                  <AddChildForm
+                    history={props.history}
+                    addChild={this.addChild}
+                    children={this.state.children}
+                  />
+                );
+              }}
+            />
+
+            <Route
+              path="/detail/:childId"
+              render={({ match }) => {
+                const childId = parseInt(match.params.childId);
+                const children = this.state.children.filter(
+                  child => child.id === childId
+                );
+                if (children.length) {
+                  const child = children[0];
+                  return (
+                    <Child
+                      {...child}
+                      handleNewItem={this.handleNewItem}
+                      achieveTask={this.achieveTask}
+                      resetChild={this.resetChild}
+                      deleteChild={this.deleteChild}
+                      unlockReward={this.unlockReward}
+                    />
+                  );
+                }
+                return <Redirect to="/" />;
+              }}
+            />
+          </Switch>
+        </Router>
       </div>
     );
   }
