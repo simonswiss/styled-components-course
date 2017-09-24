@@ -39,7 +39,11 @@ export default class extends Component {
             />
           </fieldset>
           <fieldset>
-            <input type="submit" value={this.props.buttonText} />
+            <input
+              type="submit"
+              className="button"
+              value={this.props.buttonText}
+            />
           </fieldset>
         </form>
       </div>

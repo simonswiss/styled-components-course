@@ -1,0 +1,44 @@
+.child-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.child-info__name {
+  font-size: 3rem;
+  margin-right: 2rem;
+  flex: 1;
+  text-align: right;
+  word-break: break-word;
+}
+
+.child-info__stats {
+  flex: 0 0 100px;
+}
+
+.child-info__controls {
+  flex: 1;
+}
+
+.child-info .stat-block {
+  text-align: center;
+}
+
+.child-info .stat-block__value {
+  font-size: 6rem;
+}
+
+.child-info__controls .button--inline {
+  margin-right: 1rem;
+}
+
+.column {
+  padding: 0 2rem;
+  flex: 1;
+}
+
+.column-heading {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}

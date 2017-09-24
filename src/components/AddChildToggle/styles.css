@@ -1,0 +1,41 @@
+.add-child-toggle {
+  position: fixed;
+  z-index: 5;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 9;
+  padding: 0.75rem;
+  border: solid 2px white;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 800;
+  border-radius: 50%;
+  line-height: 1;
+  transition: all 0.1s ease-in-out;
+
+  cursor: pointer;
+}
+
+.add-child-toggle:focus {
+  outline: none;
+}
+
+.add-child-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.add-child-toggle.open {
+  transform: rotate(45deg);
+}
+
+.add-child-toggle__icon {
+  fill: white;
+  height: 32px;
+  width: 32px;
+}

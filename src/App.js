@@ -16,10 +16,10 @@ import {
   Switch
 } from "react-router-dom";
 
-import Child from "./Child";
-import Children from "./Children";
-import AddChildForm from "./AddChildForm";
-import "./App.css";
+import Child from "./components/Child";
+import Children from "./components/Children";
+import AddChildForm from "./components/AddChildForm";
+import "./styles.css";
 
 class App extends Component {
   constructor(props) {

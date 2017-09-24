@@ -1,12 +1,13 @@
 import React from "react";
+import "./styles.css";
 
 export default props => (
   <button
-    className={props.isAdding ? "add-child-button open" : "add-child-button"}
+    className={props.isAdding ? "add-child-toggle open" : "add-child-toggle"}
     onClick={props.toggleForm}
   >
     <svg
-      className="add-child-icon"
+      className="add-child-toggle__icon"
       viewBox="0 0 5 5"
       xmlns="http://www.w3.org/2000/svg"
     >

@@ -1,12 +1,18 @@
 import React, { Component } from "react";
 import { Route, Redirect } from "react-router-dom";
 
+import "./styles.css";
+
 class AddChild extends Component {
   constructor() {
     super();
     this.state = {
       trigger: false
     };
+  }
+
+  componentDidMount() {
+    this.newChild.focus();
   }
   render() {
     // shortcircuit and redirect to created page after form is submitted
